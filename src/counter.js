@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const intervalStep = 1000;
+
 class Counter extends React.Component {
 	constructor() {
 		super();
@@ -7,6 +9,7 @@ class Counter extends React.Component {
 			time: 0
 		}
 		this.intervalId = null;
+		this.interval = intervalStep;
 		this.start = this.start.bind(this);
 		this.stop = this.stop.bind(this);		
 		this.reset = this.reset.bind(this);	
@@ -28,7 +31,7 @@ class Counter extends React.Component {
 		console.log(this.state.time);
 	}
 	start() {
-		this.intervalId = setInterval(this.tick.bind(this), 1000);
+		this.intervalId = setInterval(this.tick.bind(this), this.interval);
 	}
 	stop() {
 		if(this.intervalId)
@@ -41,12 +44,16 @@ class Counter extends React.Component {
 		});
 	}
 	increment() {
-		this.tick();
+		this.interval += intervalStep;
+		this.stop();
+		this.start();
 	}
 	decrement() {
-		this.setState(prevState => {
-			time: prevState.time--;
-		});
+		if(this.interval > 0) {
+			this.interval -= intervalStep;
+			this.stop();
+			this.start();
+		}		
 	}
 	render() {
 		return (
