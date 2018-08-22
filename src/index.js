@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Clock from './clock';
+import Counter from './counter';
 
-ReactDOM.render(<Clock />, document.getElementById("root"));
+ReactDOM.render(<Counter />, document.getElementById("root"));
 /*setInterval(function(){ 
-	ReactDOM.render(<Clock />, document.getElementById("root")); 
+	ReactDOM.render(<Counter />, document.getElementById("root")); 
 }, 1000);*/
 module.hot.accept();
