@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const intervalStep = 1000;
 
-class Counter extends React.Component {
+class Counter extends Component {
 	constructor() {
 		super();
 		this.state = {
