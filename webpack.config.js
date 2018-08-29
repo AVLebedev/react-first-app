@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 //const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
@@ -13,7 +14,10 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: ['*', '.js', '.jsx']
+		extensions: ['*', '.js', '.jsx'],
+		alias: {
+			components: path.resolve(__dirname, 'src/components/')
+		}
 	},
 	output: {
 		path: __dirname + '/dist',
