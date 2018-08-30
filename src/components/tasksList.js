@@ -10,11 +10,12 @@ import Task from 'components/task';
 export default class TasksList extends React.Component {
 	render() {
 		const {tasks} = this.props;
+		const tasksStyle = {marginTop:5, borderBottom:'1px solid'};
 		return (
 			<div>
 				{
 					tasks.map(t => 
-						<Task key={t.id} {...t} />
+						<Task style={tasksStyle} key={t.id} {...t} />
 					)
 				}
 			</div>

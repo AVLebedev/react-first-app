@@ -6,13 +6,16 @@
 */
 const groups = {
 	todo: {
-		desc: 'Выполнить'
+		desc: 'Выполнить',
+		color: '#1E90FF'//'dodgerblue'
 	},
 	inProgress: {
-		desc: 'Выполняется'
+		desc: 'Выполняется',
+		color: 'yellow'
 	},
 	done: {
-		desc: 'Выполнено'
+		desc: 'Выполнено',
+		color: 'green'
 	}
 };
 

@@ -11,8 +11,9 @@ import groups from 'constants/groups';
 export default class Task extends React.Component {
 	render() {
 		const {name, description, group} = this.props;
+		const style = Object.assign({backgroundColor: group.color, padding: 5}, this.props.style);
 		return (
-			<div>
+			<div style={style}>
 				<div>Имя: {name}</div>
 				<div>Описание: {description}</div>
 				<div>Группа: {group.desc}</div> 
