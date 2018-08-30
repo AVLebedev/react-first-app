@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TasksList from 'components/tasksList';
 import groups from 'constants/groups'
+import TasksFilter from 'components/tasksFilter';
 
 const tasks = [
 	{
@@ -29,6 +30,13 @@ const tasks = [
 	}
 ];
 
-ReactDOM.render(<TasksList tasks={tasks} />, document.getElementById("root"));
+ReactDOM.render((
+		<div>
+			<TasksFilter style={{marginBottom: 50}} />
+			<TasksList tasks={tasks} /> 
+		</div>
+	),
+	document.getElementById("root")
+);
 
 module.hot.accept();
