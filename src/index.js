@@ -30,12 +30,8 @@ const tasks = [
 	}
 ];
 
-ReactDOM.render((
-		<div>
-			<TasksFilter style={{marginBottom: 50}} />
-			<TasksList tasks={tasks} /> 
-		</div>
-	),
+ReactDOM.render(
+	<TasksList tasks={tasks} />,
 	document.getElementById("root")
 );
 
