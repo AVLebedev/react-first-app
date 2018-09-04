@@ -26,7 +26,8 @@ const tasks = [
 	{
 		id: 4,
 		name: "Задача №4",
-		description: "Список ToDo: уровень - бог"
+		description: "Список ToDo: уровень - бог",
+		group: groups.todo
 	}
 ];
 

@@ -15,48 +15,20 @@ export default class TasksList extends React.Component {
 		this.state = {
 			checkedGroups: []
 		}
-		this.handleChange = this.handleChange.bind(this);
-		this.handleChangeAll = this.handleChangeAll.bind(this);
+		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
+
 		const groupsList = [];
 		for(let g in groups) {
-			groupsList.push(g);
+			groupsList.push(groups[g]);
 		}
 		this.groupsList = groupsList;
 	}
 
-	handleChange(e) {
-		const checkbox = e.target;
-		const group = parseInt(checkbox.value);
-
-    	const checkedGroups = this.state.checkedGroups;
-	    checkbox.checked ? checkedGroups.push(group)
-	    				 : checkedGroups.pop(group);
+	updateCheckedGroups(newCheckedGroups){
 		this.setState({
-			checkedGroups: checkedGroups
+			checkedGroups: newCheckedGroups
 		}); 
-		console.log(this.state.checkedGroups);
 	}
-
-	handleChangeAll(e) {
-		const checkbox = e.target;
-		const isChecked = parseInt(checkbox.value);
-	    isChecked ? this.checkAll() : this.uncheckAll();
-		console.log(this.state.checkedGroups);
-	}
-	checkAll = () => {
-    	for(let i=0; i < groups.length; i++) {
-    		if(!checkedGroups.includes(g.id))
-    			checkedGroups.push(g.id);
-    	}
-    	this.setState({
-    		checkedGroups: checkedGroups //ToDo: записать короче
-    	});
-    }
-    uncheckAll = () => {
-		this.setState({
-			checkedGroups: []
-		});
-    }
 
 	render() {
 		const {tasks} = this.props;
@@ -67,13 +39,15 @@ export default class TasksList extends React.Component {
 				<TasksFilter style={{marginBottom: 50}} 
 							 groupsList={this.groupsList}
 							 checkedGroups={checkedGroups} 
-							 handleChange={this.handleChange}
-							 handleChangeAll={this.handleChangeAll} />
+							 changeCallback={this.updateCheckedGroups} />
 				<div>
 					{
 						tasks.map((t) => {
-							<Task style={tasksStyle} key={t.id} {...t} />
-						})
+							console.log(t.group);
+							if(checkedGroups.includes(t.group.id))
+								return <Task style={tasksStyle} key={t.id} {...t} />
+						}
+						)
 					}
 				</div>
 			</div>
