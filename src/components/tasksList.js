@@ -12,16 +12,18 @@ import groups from 'constants/groups';
 export default class TasksList extends React.Component {
 	constructor(){
 		super();
-		this.state = {
-			checkedGroups: []
-		}
-		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
-
+		
 		const groupsList = [];
 		for(let g in groups) {
 			groupsList.push(groups[g]);
 		}
 		this.groupsList = groupsList;
+
+		this.state = {
+			checkedGroups: this.groupsList.map(g => g.id)
+		}
+
+		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
 	}
 
 	updateCheckedGroups(newCheckedGroups){
@@ -43,7 +45,6 @@ export default class TasksList extends React.Component {
 				<div>
 					{
 						tasks.map((t) => {
-							console.log(t.group);
 							if(checkedGroups.includes(t.group.id))
 								return <Task style={tasksStyle} key={t.id} {...t} />
 						}

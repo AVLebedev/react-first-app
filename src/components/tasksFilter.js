@@ -8,7 +8,7 @@ import React from 'react';
 export default class TasksFilter extends React.Component {
 	constructor(props){
 		super(props);
-		this.checkedGroups = [];//props.checkedGroups;	
+		this.checkedGroups = props.checkedGroups;
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChangeAll = this.handleChangeAll.bind(this);
 
@@ -22,7 +22,7 @@ export default class TasksFilter extends React.Component {
 
 	handleChange(e) {
 		const checkbox = e.target;
-		const groupId = parseInt(checkbox.value); console.log(checkbox.checked);
+		const groupId = parseInt(checkbox.value);
 	    checkbox.checked ? this.checkedGroups.push(groupId)
 	    				 : this.checkedGroups.splice(this.checkedGroups.indexOf(groupId), 1);
 		this.changeCallback(this.checkedGroups);
@@ -50,7 +50,7 @@ export default class TasksFilter extends React.Component {
 			<div style={style}>	
 				<label style={{padding: 5, marginRight: 5, backgroundColor: 'grey'}}>
 					Все
-					<input type="checkbox" onChange={this.handleChangeAll} />	
+					<input type="checkbox" checked={checkedGroups.length === groupsList.length} onChange={this.handleChangeAll} />	
 				</label>
 				{
 					groupsList.map(g => 
