@@ -1,5 +1,4 @@
 import React from 'react';
-import groups from 'constants/groups';
 
 /*
 	Список задач отрисовывает либо все задачи, либо задачи выбранной группы. 
@@ -9,33 +8,37 @@ import groups from 'constants/groups';
 export default class TasksFilter extends React.Component {
 	constructor(props){
 		super(props);
-		this.checkedGroups = {props};	
+		this.checkedGroups = [];//props.checkedGroups;	
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChangeAll = this.handleChangeAll.bind(this);
 
-		if(this.props.changeCallback && this.props.changeCallback.type === 'function')
+		if(this.props.changeCallback && typeof this.props.changeCallback === 'function'){
 			this.changeCallback = this.props.changeCallback;
-		else
+		}
+		else {
 			this.changeCallback = () => {};
+		}
 	}
 
 	handleChange(e) {
 		const checkbox = e.target;
-		const group = parseInt(checkbox.value);
-	    checkbox.checked ? this.checkedGroups.push(group)
-	    				 : this.checkedGroups.pop(group);
-		this.changeCallback();
+		const groupId = parseInt(checkbox.value); console.log(checkbox.checked);
+	    checkbox.checked ? this.checkedGroups.push(groupId)
+	    				 : this.checkedGroups.splice(this.checkedGroups.indexOf(groupId), 1);
+		this.changeCallback(this.checkedGroups);
 	}
 
 	handleChangeAll(e) {
-		e.checked ? this.checkAll() : this.uncheckAll();
-		this.changeCallback();
+		const checkbox = e.target;
+		checkbox.checked ? this.checkAll()
+						 : this.uncheckAll();
+		this.changeCallback(this.checkedGroups);
 	}
 	checkAll = () => {
-    	for(let i=0; i < groups.length; i++) {
-    		if(!this.checkedGroups.includes(g.id))
-    			this.checkedGroups.push(g.id);
-    	}
+		this.uncheckAll();
+    	this.props.groupsList.forEach((g) => {
+    		this.checkedGroups.push(g.id);	
+    	});
     }
     uncheckAll = () => {
 		this.checkedGroups = []
