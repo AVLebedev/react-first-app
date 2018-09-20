@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 //const NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
@@ -10,14 +11,24 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				exclude: /(node_modules)/,
 				use: ['babel-loader']
-			}
+			},
+			{
+		      	test: /\.scss$/,
+		      	use:  [
+		      		'style-loader',
+		            MiniCssExtractPlugin.loader,
+			        'css-loader', 
+		      		'sass-loader'
+	      		]		      	
+		    }
 		]
 	},
 	resolve: {
 		extensions: ['*', '.js', '.jsx'],
 		alias: {
 			components: path.resolve(__dirname, 'src/components/'),
-			constants: path.resolve(__dirname, 'src/constants/')
+			constants: path.resolve(__dirname, 'src/constants/'),
+			styles: path.resolve(__dirname, 'src/styles/')
 		}
 	},
 	output: {
@@ -27,6 +38,9 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
+		new MiniCssExtractPlugin({
+	        filename: 'style.css'
+	    })
 		//new webpack.EnvironmentPlugin('NODE_ENV')
 	],
 	devServer: {
