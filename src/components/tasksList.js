@@ -1,6 +1,7 @@
 import React from 'react';
 import TasksFilter from 'components/tasksFilter';
 import Task from 'components/task';
+import TasksForm from 'components/tasksForm';
 import groups from 'constants/groups';
 
 /*
@@ -38,7 +39,8 @@ export default class TasksList extends React.Component {
 		const {checkedGroups} = this.state;
 		return (
 			<div>
-				<TasksFilter style={{marginBottom: 50}} 
+				<TasksForm style={{marginBottom: 30}} groupsList={this.groupsList} />
+				<TasksFilter style={{marginBottom: 30}} 
 							 groupsList={this.groupsList}
 							 checkedGroups={checkedGroups} 
 							 changeCallback={this.updateCheckedGroups} />
@@ -47,8 +49,7 @@ export default class TasksList extends React.Component {
 						tasks.map((t) => {
 							if(checkedGroups.includes(t.group.id))
 								return <Task style={tasksStyle} key={t.id} {...t} />
-						}
-						)
+						})
 					}
 				</div>
 			</div>

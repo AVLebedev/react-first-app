@@ -4,6 +4,8 @@ import TasksList from 'components/tasksList';
 import groups from 'constants/groups'
 import TasksFilter from 'components/tasksFilter';
 
+import 'styles/tasksForm.scss';
+
 const tasks = [
 	{
 		id: 1,
