@@ -1,5 +1,6 @@
 import React from 'react';
 import groups from 'constants/groups';
+import { IoIosClose } from 'react-icons/io';
 
 /*
 	Задача - имеет поля 
@@ -10,13 +11,16 @@ import groups from 'constants/groups';
 
 export default class Task extends React.Component {
 	render() {
-		const {name, description, group} = this.props;
+		const {id, name, description, group, handleDelete} = this.props;
 		const style = Object.assign({backgroundColor: group.color, padding: 5}, this.props.style);
 		return (
 			<div style={style}>
 				<div>Имя: {name}</div>
 				<div>Описание: {description}</div>
 				<div>Группа: {group.desc}</div> 
+				<div title="Удалить" className="del-btn" onClick={(e) => handleDelete(id, e)}>
+					<IoIosClose />
+				</div>
 			</div>
 		)			
 	}

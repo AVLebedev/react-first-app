@@ -40,6 +40,14 @@ export default class TasksList extends React.Component {
 		];
 	}	
 
+	deleteTask = (id) => {
+		const {tasks} = this.state;
+		tasks.splice(tasks.indexOf(tasks.find(t => t.id == id)), 1);
+		this.setState({
+			tasks
+		});
+	}
+
 	constructor(){
 		super();
 
@@ -71,7 +79,6 @@ export default class TasksList extends React.Component {
 	}
 
 	render() {
-		// const {tasks} = this.props;
 		const tasksStyle = {marginTop:5, borderBottom:'1px solid'};
 		const {checkedGroups, tasks} = this.state;
 		return (
@@ -88,7 +95,7 @@ export default class TasksList extends React.Component {
 					{
 						tasks.map((t) => {
 							if(checkedGroups.includes(t.group.id))
-								return <Task style={tasksStyle} key={t.id} {...t} />
+								return <Task style={tasksStyle} key={t.id} handleDelete={this.deleteTask} {...t} />
 						})
 					}
 				</div>
