@@ -8,12 +8,28 @@ export default class TasksForm extends React.Component {
 	constructor(props){
 		super(props);
 
+		this.state = {
+			nameValid: true,
+			descValid: true
+		}
+
 		if(this.props.submitCallback && typeof this.props.submitCallback === 'function'){
 			this.submitCallback = this.props.submitCallback;
 		}
 		else {
 			this.submitCallback = () => {};
 		}
+	}
+
+	validate = (t) => {
+		let nameValid = t.name !== '', 
+			descValid = t.description !== '';
+		this.setState({
+			nameValid,
+			descValid
+		});
+		console.log(this.state);
+		return nameValid && descValid;
 	}
 
 	handleSubmit = (e) => {
@@ -25,8 +41,12 @@ export default class TasksForm extends React.Component {
 			description: this.refs.taskDesc.value,
 			group: this.props.groupsList.find(g => g.id == this.refs.taskGroup.value)
 		}
-		tasks.push(newTask);
-		this.submitCallback(tasks);
+		if (this.validate(newTask)) {
+			tasks.push(newTask);
+			this.submitCallback(tasks);
+		} else {
+			alert('Заполните обязательные поля!')
+		}
 	}
 
 	render() {
@@ -37,11 +57,11 @@ export default class TasksForm extends React.Component {
 					<tbody>
 						<tr>
 							<td>Имя: </td>
-							<td><input ref="taskName" type="text" /></td>
+							<td><input ref="taskName" type="text" className={this.state.nameValid ? '' : 'error'} /></td>
 						</tr>
 						<tr>
 							<td>Описание: </td>
-							<td><input ref="taskDesc" type="text" /></td>
+							<td><input ref="taskDesc" type="text" className={this.state.descValid ? '' : 'error'} /></td>
 						</tr>
 						<tr>
 							<td>Группа: </td>
