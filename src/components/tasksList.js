@@ -2,6 +2,7 @@ import React from 'react';
 import TasksFilter from 'components/tasksFilter';
 import Task from 'components/task';
 import TasksForm from 'components/tasksForm';
+import TasksSorter from 'components/tasksSorter';
 import groups from 'constants/groups';
 
 /*
@@ -87,6 +88,7 @@ export default class TasksList extends React.Component {
 						   groupsList={this.groupsList}
 						   tasks={tasks}
 						   submitCallback={this.updateTasksList} />
+				<TasksSorter tasks={this.state.tasks} sortCallback={this.updateTasksList} />
 				<TasksFilter style={{marginBottom: 30}} 
 							 groupsList={this.groupsList}
 							 checkedGroups={checkedGroups} 
