@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TasksList from 'components/tasksList';
-import groups from 'constants/groups'
-import TasksFilter from 'components/tasksFilter';
 
+import App from 'routers/app';
 import 'styles/tasksForm.scss';
 import 'styles/task.scss';
 
-ReactDOM.render(
-	<TasksList />,
-	document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
 
 module.hot.accept();

@@ -28,7 +28,8 @@ module.exports = {
 		alias: {
 			components: path.resolve(__dirname, 'src/components/'),
 			constants: path.resolve(__dirname, 'src/constants/'),
-			styles: path.resolve(__dirname, 'src/styles/')
+			styles: path.resolve(__dirname, 'src/styles/'),
+			routers: path.resolve(__dirname, 'src/routers/'),
 		}
 	},
 	output: {
