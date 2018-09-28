@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import groups from 'constants/groups';
 import { IoIosClose } from 'react-icons/io';
 
@@ -15,7 +16,7 @@ export default class Task extends React.Component {
 		const style = Object.assign({backgroundColor: group.color, padding: 5}, this.props.style);
 		return (
 			<div style={style}>
-				<div>Имя: {name}</div>
+				<div><Link to={'/list/' + id}>Имя: {name}</Link></div>
 				<div>Описание: {description}</div>
 				<div>Группа: {group.desc}</div> 
 				<div title="Удалить" className="del-btn" onClick={(e) => handleDelete(id, e)}>

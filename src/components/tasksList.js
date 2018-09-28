@@ -82,6 +82,8 @@ export default class TasksList extends React.Component {
 	render() {
 		const tasksStyle = {marginTop:5, borderBottom:'1px solid'};
 		const {checkedGroups, tasks} = this.state;
+		const {item_id} = this.props.match.params;
+
 		return (
 			<div>
 				<TasksForm style={{marginBottom: 30}} 
@@ -96,8 +98,9 @@ export default class TasksList extends React.Component {
 				<div>
 					{
 						tasks.map((t) => {
-							if(checkedGroups.includes(t.group.id))
-								return <Task style={tasksStyle} key={t.id} handleDelete={this.deleteTask} {...t} />
+							if (item_id && t.id == item_id || !item_id)
+								if (checkedGroups.includes(t.group.id))
+									return <Task style={tasksStyle} key={t.id} handleDelete={this.deleteTask} {...t} />
 						})
 					}
 				</div>
