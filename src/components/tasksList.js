@@ -12,35 +12,6 @@ import groups from 'constants/groups';
 */
 
 export default class TasksList extends React.Component {
-	initTasks = () => {
-		return [
-			{
-				id: 1,
-				name: "Задача №1",
-				description: "Реализовать счётчик",
-				group: groups.done
-			},
-			{
-				id: 2,
-				name: "Задача №2",
-				description: "Список ToDo: минимальная реализация",
-				group: groups.inProgress
-			},
-			{
-				id: 3,
-				name: "Задача №3",
-				description: "Список ToDo: дополнительный функционал",
-				group: groups.todo
-			},
-			{
-				id: 4,
-				name: "Задача №4",
-				description: "Список ToDo: уровень - бог",
-				group: groups.todo
-			}
-		];
-	}	
-
 	deleteTask = (id) => {
 		const {tasks} = this.state;
 		tasks.splice(tasks.indexOf(tasks.find(t => t.id == id)), 1);
@@ -49,7 +20,7 @@ export default class TasksList extends React.Component {
 		});
 	}
 
-	constructor(){
+	constructor(props){
 		super();
 
 		const groupsList = [];
@@ -60,7 +31,7 @@ export default class TasksList extends React.Component {
 
 		this.state = {
 			checkedGroups: this.groupsList.map(g => g.id),
-			tasks: this.initTasks()
+			tasks: props.tasks
 		}
 
 		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
