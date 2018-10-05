@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
 
 import About from 'components/about';
-import VisibleTasksList from 'containers/VisibleTasksList';
+import VisibleTasksList from 'containers/visibleTasksList';
 
 
 const App = () => (

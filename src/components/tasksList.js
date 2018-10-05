@@ -1,7 +1,7 @@
 import React from 'react';
 import TasksFilter from 'components/tasksFilter';
 import Task from 'components/task';
-import TasksForm from 'components/tasksForm';
+import TaskAddForm from 'containers/taskAddForm';
 import TasksSorter from 'components/tasksSorter';
 import groups from 'constants/groups';
 
@@ -30,8 +30,7 @@ export default class TasksList extends React.Component {
 		this.groupsList = groupsList;
 
 		this.state = {
-			checkedGroups: this.groupsList.map(g => g.id),
-			tasks: props.tasks
+			checkedGroups: this.groupsList.map(g => g.id)
 		}
 
 		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
@@ -52,16 +51,16 @@ export default class TasksList extends React.Component {
 
 	render() {
 		const tasksStyle = {marginTop:5, borderBottom:'1px solid'};
-		const {checkedGroups, tasks} = this.state;
+		const {tasks} = this.props;
+		const {checkedGroups} = this.state;
 		const {item_id} = this.props.match.params;
 
 		return (
 			<div>
-				<TasksForm style={{marginBottom: 30}} 
+				<TaskAddForm style={{marginBottom: 30}} 
 						   groupsList={this.groupsList}
-						   tasks={tasks}
-						   submitCallback={this.updateTasksList} />
-				<TasksSorter tasks={this.state.tasks} sortCallback={this.updateTasksList} />
+						   tasks={tasks} />
+				<TasksSorter tasks={tasks} sortCallback={this.updateTasksList} />
 				<TasksFilter style={{marginBottom: 30}} 
 							 groupsList={this.groupsList}
 							 checkedGroups={checkedGroups} 

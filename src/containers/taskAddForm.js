@@ -1,23 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addTask } from 'actions';
 
 /*
 	Форма добавляет новый Task в массив задач.
 */
 
-export default class TasksForm extends React.Component {
+class TaskAddForm extends React.Component {
 	constructor(props){
 		super(props);
-
 		this.state = {
 			nameValid: true,
 			descValid: true
-		}
-
-		if(this.props.submitCallback && typeof this.props.submitCallback === 'function'){
-			this.submitCallback = this.props.submitCallback;
-		}
-		else {
-			this.submitCallback = () => {};
 		}
 	}
 
@@ -33,7 +27,7 @@ export default class TasksForm extends React.Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const {tasks} = this.props;
+		const {tasks, dispatch} = this.props;
 		const newTask = {
 			id: this.getMaxTaskId(tasks) + 1,
 			name: this.refs.taskName.value,
@@ -41,8 +35,7 @@ export default class TasksForm extends React.Component {
 			group: this.props.groupsList.find(g => g.id == this.refs.taskGroup.value)
 		}
 		if (this.validate(newTask)) {
-			tasks.push(newTask);
-			this.submitCallback(tasks);
+			dispatch(addTask(newTask));
 		} else {
 			alert('Заполните обязательные поля!')
 		}
@@ -89,3 +82,5 @@ export default class TasksForm extends React.Component {
 		)			
 	}
 }
+
+export default connect()(TaskAddForm);
