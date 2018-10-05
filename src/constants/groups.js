@@ -25,4 +25,10 @@ const groups = {
 	}
 };
 
+const groupsList = [];
+for(let g in groups) {
+	groupsList.push(groups[g]);
+}
+export { groupsList };
+
 export default groups;

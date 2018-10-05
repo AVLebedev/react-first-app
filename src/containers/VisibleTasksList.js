@@ -1,7 +1,24 @@
+import React from 'react'
 import { connect } from 'react-redux'
-import tasksList from 'components/tasksList'
-import groups from 'constants/groups'
+import { groupsList as groups } from 'constants/groups'
+import TaskAddForm from 'components/taskAddForm'
+import TasksList from 'components/tasksList'
 // import { VisibilityFilters } from 'actions/actions'
+
+class VisibleTasksList extends React.Component {  
+
+  render() {
+    const { tasks, groupsList } = this.props;
+    const { item_id } = this.props.match.params;
+
+    return (
+       <div>
+          <TaskAddForm style={{marginBottom: 30}} tasks={tasks} groupsList={groupsList} />
+          <TasksList tasks={tasks} groupsList={groupsList} item_id={item_id} />
+       </div>
+    )
+  }
+}
 
 const getVisibleTasks = (tasks/*, filter*/) => {
   return tasks
@@ -19,7 +36,8 @@ const getVisibleTasks = (tasks/*, filter*/) => {
 
 const mapStateToProps = (state) => {
   return {
-    tasks: state.tasks//, state.visibilityFilter)
+    tasks: state.tasks,//, state.visibilityFilter)
+    groupsList: groups
   }
 }
 
@@ -30,4 +48,4 @@ const mapDispatchToProps = ({})//dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(tasksList)
+)(VisibleTasksList)

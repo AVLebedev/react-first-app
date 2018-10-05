@@ -1,9 +1,7 @@
 import React from 'react';
 import TasksFilter from 'components/tasksFilter';
 import Task from 'components/task';
-import TaskAddForm from 'containers/taskAddForm';
 import TasksSorter from 'components/tasksSorter';
-import groups from 'constants/groups';
 
 /*
 	Список задач отрисовывает либо все задачи, либо задачи выбранной группы. 
@@ -23,14 +21,8 @@ export default class TasksList extends React.Component {
 	constructor(props){
 		super();
 
-		const groupsList = [];
-		for(let g in groups) {
-			groupsList.push(groups[g]);
-		}
-		this.groupsList = groupsList;
-
 		this.state = {
-			checkedGroups: this.groupsList.map(g => g.id)
+			checkedGroups: props.groupsList.map(g => g.id)
 		}
 
 		this.updateCheckedGroups = this.updateCheckedGroups.bind(this);
@@ -51,18 +43,14 @@ export default class TasksList extends React.Component {
 
 	render() {
 		const tasksStyle = {marginTop:5, borderBottom:'1px solid'};
-		const {tasks} = this.props;
+		const {tasks, groupsList, item_id} = this.props;
 		const {checkedGroups} = this.state;
-		const {item_id} = this.props.match.params;
 
 		return (
 			<div>
-				<TaskAddForm style={{marginBottom: 30}} 
-						   groupsList={this.groupsList}
-						   tasks={tasks} />
 				<TasksSorter tasks={tasks} sortCallback={this.updateTasksList} />
 				<TasksFilter style={{marginBottom: 30}} 
-							 groupsList={this.groupsList}
+							 groupsList={groupsList}
 							 checkedGroups={checkedGroups} 
 							 changeCallback={this.updateCheckedGroups} />
 				<div>
